@@ -1,8 +1,8 @@
-/*
- * Create a list that holds all of your cards
- */
 const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',  'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
-const cardPairs = cards.concat(cards);
+
+// Double the array of cards and shuffle them
+const shuffledCards = shuffle(cards.concat(cards));
+console.log(shuffledCards);
 
 /*
  * Display the cards on the page
@@ -10,6 +10,8 @@ const cardPairs = cards.concat(cards);
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
