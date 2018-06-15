@@ -1,15 +1,19 @@
 const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',  'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
+const deckElement = document.querySelector('.deck');
 
 // Double the array of cards and shuffle them
 const shuffledCards = shuffle(cards.concat(cards));
-console.log(shuffledCards);
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+// Dynamically add shuffled cards to the deck element
+ shuffledCards.forEach(card => {
+     console.log('card: ', card);
+     const cardElement = document.createElement('li');
+     const iconElement = document.createElement('i');
+     cardElement.setAttribute('class', 'card');
+     iconElement.setAttribute('class', card);
+     cardElement.appendChild(iconElement);
+     deckElement.appendChild(cardElement);    
+ });
 
 
 
