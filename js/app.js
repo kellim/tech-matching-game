@@ -2,7 +2,7 @@
 const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
                'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 const deckElement = document.querySelector('.deck');
-const openCards = [];
+let openCards = [];
 
 // Double the array of cards and shuffle them
 const shuffledCards = shuffle(cards.concat(cards));
@@ -19,7 +19,27 @@ shuffledCards.forEach(card => {
   cardElement.addEventListener('click', () => {
     if (isValidCardClick(cardElement)) {
       displayCard(cardElement);
+      if (isMatch(openCards)) {
+        openCards.forEach((card) => {
+          updateMatchedCard(card);
+        });
+      }
+      if (openCards.length === 2) {
+        if (!isMatch(openCards)) {
+          setTimeout(function() {
+            openCards.forEach((cardEl) => {
+              cardEl.classList.remove('open', 'show');
+            });
+            resetOpenCards();
+           }, 1000);
+        } else {
+          resetOpenCards();
+        }
+      }
+
+      // endTurn(openCards);
     }
+      
   });
 });
 
@@ -50,9 +70,23 @@ function isValidCardClick(cardElement) {
 function displayCard(cardElement) {
     cardElement.classList.add('open', 'show');
     openCards.push(cardElement);
-    console.log('openCards', openCards);
-    console.log('openCards.length', openCards.length);
 }
+
+function isMatch(openCards) {
+  if (openCards.length === 2 && openCards[0].innerHTML === openCards[1].innerHTML) {
+    return true;
+  }
+  return false;
+}
+
+function updateMatchedCard(cardElement) {
+  cardElement.classList.add('match');
+}
+
+function resetOpenCards() {
+  openCards = [];
+}
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
