@@ -3,45 +3,54 @@ const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
                'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 const deckElement = document.querySelector('.deck');
 let openCards = [];
+let matchedCards = [];
 
 // Double the array of cards and shuffle them
-const shuffledCards = shuffle(cards.concat(cards));
 
-// Dynamically add shuffled cards with icons from Font Awesome to the deck element
-shuffledCards.forEach(card => {
-  console.log('card: ', card);
-  const cardElement = document.createElement('li');
-  const iconElement = document.createElement('i');
-  cardElement.classList.add('card');
-  iconElement.classList.add('fa', card);
-  cardElement.appendChild(iconElement);
-  deckElement.appendChild(cardElement);
-  cardElement.addEventListener('click', () => {
-    if (isValidCardClick(cardElement)) {
-      displayCard(cardElement);
-      if (isMatch(openCards)) {
-        openCards.forEach((card) => {
-          updateMatchedCard(card);
-        });
-      }
-      if (openCards.length === 2) {
-        if (!isMatch(openCards)) {
-          setTimeout(function() {
-            openCards.forEach((cardEl) => {
-              cardEl.classList.remove('open', 'show');
-            });
-            resetOpenCards();
-           }, 1000);
-        } else {
-          resetOpenCards();
+function initGame() {
+
+  const shuffledCards = shuffle(cards.concat(cards));
+
+  // Dynamically add shuffled cards with icons from Font Awesome to the deck element
+  shuffledCards.forEach(card => {
+    console.log('card: ', card);
+    const cardElement = document.createElement('li');
+    const iconElement = document.createElement('i');
+    cardElement.classList.add('card');
+    iconElement.classList.add('fa', card);
+    cardElement.appendChild(iconElement);
+    deckElement.appendChild(cardElement);
+    cardElement.addEventListener('click', () => {
+      if (isValidCardClick(cardElement)) {
+        displayCard(cardElement);
+        if (isMatch(openCards)) { 
+          openCards.forEach((card) => {
+            updateMatchedCard(card);
+          });
+          if (isOver) {
+            console.log('Game Over!');
+          }
         }
+        if (openCards.length === 2) {
+          if (!isMatch(openCards)) {
+            setTimeout(function() {
+              openCards.forEach((cardEl) => {
+                cardEl.classList.remove('open', 'show');
+              });
+              resetOpenCards();
+             }, 1000);
+          } else {
+            resetOpenCards();
+          }
+        }
+  
+        // endTurn(openCards);
       }
-
-      // endTurn(openCards);
-    }
-      
+        
+    });
   });
-});
+}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976 (changed var to let)
 function shuffle(array) {
@@ -79,15 +88,21 @@ function isMatch(openCards) {
   return false;
 }
 
+function isOver(matchedCards) {
+  return (matchedCards.length === cards.length);
+}
+
 function updateMatchedCard(cardElement) {
   cardElement.classList.add('match');
+  matchedCards.push(cardElement);
+  console.log(matchedCards);
 }
 
 function resetOpenCards() {
   openCards = [];
 }
 
-
+initGame();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
