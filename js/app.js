@@ -2,18 +2,23 @@
 const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
                'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 const deckElement = document.querySelector('.deck');
+const modal = document.getElementById('congratsModal');
+const closeBtn = document.getElementsByClassName('closeBtn')[0];
+console.log('closeBtn', closeBtn)
 let openCards = [];
 let matchedCards = [];
+
 
 // Double the array of cards and shuffle them
 
 function initGame() {
 
   const shuffledCards = shuffle(cards.concat(cards));
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('click', outsideClick);
 
   // Dynamically add shuffled cards with icons from Font Awesome to the deck element
   shuffledCards.forEach(card => {
-    console.log('card: ', card);
     const cardElement = document.createElement('li');
     const iconElement = document.createElement('i');
     cardElement.classList.add('card');
@@ -27,8 +32,9 @@ function initGame() {
           openCards.forEach((card) => {
             updateMatchedCard(card);
           });
-          if (isOver) {
-            console.log('Game Over!');
+          if (isOver(matchedCards.length, shuffledCards.length)) {
+            console.log('isOver: ', isOver);
+            displayModal();
           }
         }
         if (openCards.length === 2) {
@@ -88,8 +94,9 @@ function isMatch(openCards) {
   return false;
 }
 
-function isOver(matchedCards) {
-  return (matchedCards.length === cards.length);
+function isOver(matchedCardsLen, cardsLen) {
+  console.log('matchedCards', matchedCards);
+  return (matchedCardsLen === cardsLen);
 }
 
 function updateMatchedCard(cardElement) {
@@ -100,6 +107,20 @@ function updateMatchedCard(cardElement) {
 
 function resetOpenCards() {
   openCards = [];
+}
+
+function displayModal() {
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+function outsideClick(e) {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
 }
 
 initGame();
