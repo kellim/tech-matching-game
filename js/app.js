@@ -1,6 +1,6 @@
 // cards array contains names for Font Awesome icons that will be visible when the card is flipped over
-const cards = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
-               'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
+const cards = ['fa-mobile', 'fa-laptop', 'fa-server', 'fa-bug',
+               'fa-download', 'fa-wifi', 'fa-print', 'fa-code'];
 const deckElement = document.querySelector('.deck');
 const modal = document.getElementById('congratsModal');
 const closeBtn = document.getElementsByClassName('closeBtn')[0];
@@ -26,15 +26,12 @@ function initGame() {
     cardElement.appendChild(iconElement);
     deckElement.appendChild(cardElement);
     cardElement.addEventListener('click', (event) => {
-      console.log('event', event);
-      console.log('event.target', event.target)
       flipCard(event.target);
     });
   });
 }
 
-function flipCard(cardElement) {
-    
+function flipCard(cardElement) {   
     if (isValidCardClick(cardElement)) {
       displayCard(cardElement);
       if (isMatch(openCards)) { 
