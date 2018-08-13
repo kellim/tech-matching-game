@@ -7,13 +7,13 @@ const closeBtn = document.getElementsByClassName('closeBtn')[0];
 console.log('closeBtn', closeBtn)
 let openCards = [];
 let matchedCards = [];
-
+let shuffledCards;
 
 // Double the array of cards and shuffle them
 
 function initGame() {
 
-  const shuffledCards = shuffle(cards.concat(cards));
+  shuffledCards = shuffle(cards.concat(cards));
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('click', outsideClick);
 
@@ -25,38 +25,40 @@ function initGame() {
     iconElement.classList.add('fa', card);
     cardElement.appendChild(iconElement);
     deckElement.appendChild(cardElement);
-    cardElement.addEventListener('click', () => {
-      if (isValidCardClick(cardElement)) {
-        displayCard(cardElement);
-        if (isMatch(openCards)) { 
-          openCards.forEach((card) => {
-            updateMatchedCard(card);
-          });
-          if (isOver(matchedCards.length, shuffledCards.length)) {
-            console.log('isOver: ', isOver);
-            displayModal();
-          }
-        }
-        if (openCards.length === 2) {
-          if (!isMatch(openCards)) {
-            setTimeout(function() {
-              openCards.forEach((cardEl) => {
-                cardEl.classList.remove('open', 'show');
-              });
-              resetOpenCards();
-             }, 1000);
-          } else {
-            resetOpenCards();
-          }
-        }
-  
-        // endTurn(openCards);
-      }
-        
+    cardElement.addEventListener('click', (event) => {
+      console.log('event', event);
+      console.log('event.target', event.target)
+      flipCard(event.target);
     });
   });
 }
 
+function flipCard(cardElement) {
+    
+    if (isValidCardClick(cardElement)) {
+      displayCard(cardElement);
+      if (isMatch(openCards)) { 
+        openCards.forEach((card) => {
+          updateMatchedCard(card);
+        });
+        if (isOver(matchedCards.length, shuffledCards.length)) {
+          displayModal();
+        }
+      }
+      if (openCards.length === 2) {
+        if (!isMatch(openCards)) {
+          setTimeout(function() {
+            openCards.forEach((cardEl) => {
+              cardEl.classList.remove('open', 'show');
+            });
+            resetOpenCards();
+           }, 1000);
+        } else {
+          resetOpenCards();
+        }
+      }
+    }
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976 (changed var to let)
 function shuffle(array) {
