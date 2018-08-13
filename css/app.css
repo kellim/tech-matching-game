@@ -72,13 +72,13 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 2.75em;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 33px;
+    font-size: 2.75em;
 }
 
 /*
