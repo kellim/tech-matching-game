@@ -45,7 +45,9 @@ function flipCard(cardElement) {
         openCards.forEach((card) => {
           updateMatchedCard(card);
         });
-        if (isOver(matchedCards.length, shuffledCards.length)) {
+        // Temporarily updated to test end game so one match wins game
+        if (isOver(matchedCards.length, 2)) { // shuffledCards.length)) {
+          clearInterval(timerInterval);
           displayModal();
         }
       }
@@ -107,6 +109,7 @@ function isOver(matchedCardsLen, cardsLen) {
   return (matchedCardsLen === cardsLen);
 }
 
+
 function updateMatchedCard(cardElement) {
   cardElement.classList.add('match');
   matchedCards.push(cardElement);
@@ -117,7 +120,7 @@ function startTimer() {
   let seconds = 0,
       minutes = 0,
       hours = 0;
-  let timerInterval = setInterval(() => {
+  timerInterval = setInterval(() => {
     seconds++;
     if (seconds >= 60) {
       minutes ++;
@@ -128,8 +131,6 @@ function startTimer() {
       minutes = minutes % 60;
     }
     timeElement.innerText = `${("0" + hours).slice(-2)}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`
-
-    console.log('hours: ', hours, 'minutes: ', minutes, 'seconds: ', seconds);
   }, 1000)
 }
 
