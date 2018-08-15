@@ -118,6 +118,10 @@ h1 {
     padding: 0 15px;
 }
 
+/*
+ * Styles for the Modal
+ */
+
 .modal {
     display: none;
     position: fixed;
@@ -151,6 +155,7 @@ h1 {
 }
 
 .modal-body {
+    width: 100%;
     padding: 10px 20px;
 }
 
@@ -164,6 +169,12 @@ h1 {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.trophy {
+    text-align: center;
+    color: #ffd700;
+    font-size: 5em;
 }
 
 @keyframes modalopen {

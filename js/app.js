@@ -142,7 +142,7 @@ function displayModal() {
   finalTime += hours > 0 && minutes > 0 ? ', ' : '';
   finalTime += minutes > 0 ? `${minutes} minute${minutes === 1 ? '' : 's'} ` : '';
   finalTime += finalTime ? ' and ' : '';
-  finalTime += `${seconds} second${seconds === 1 ? '' : 's'}.`;
+  finalTime += `${seconds} second${seconds === 1 ? '' : 's'}`;
   modalTime.textContent = finalTime;
   modalMoves.textContent = moves;
   modal.style.display = 'block';
