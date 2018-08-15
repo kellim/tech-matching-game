@@ -8,7 +8,9 @@ const movesElement = document.querySelector('.moves');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
+let timerInterval;
 let shuffledCards;
+let gameStarted = false;
 
 function initGame() {
   shuffledCards = shuffle(cards.concat(cards));
@@ -32,6 +34,12 @@ function initGame() {
 function flipCard(cardElement) {   
     if (isValidCardClick(cardElement)) {
       displayCard(cardElement);
+      // timer should start on first card click of a game.
+      if (!gameStarted) {
+          startTimer();
+          gameStarted = true;
+      }
+
       if (isMatch(openCards)) { 
         openCards.forEach((card) => {
           updateMatchedCard(card);
@@ -94,14 +102,33 @@ function isMatch(openCards) {
 }
 
 function isOver(matchedCardsLen, cardsLen) {
-  console.log('matchedCards', matchedCards);
+  // console.log('matchedCards', matchedCards);
   return (matchedCardsLen === cardsLen);
 }
 
 function updateMatchedCard(cardElement) {
   cardElement.classList.add('match');
   matchedCards.push(cardElement);
-  console.log(matchedCards);
+  // console.log(matchedCards);
+}
+
+function startTimer() {
+  let seconds = 0,
+      minutes = 0,
+      hours = 0;
+  let timerInterval = setInterval(() => {
+    seconds++;
+    if (seconds >= 60) {
+      minutes ++;
+      seconds = seconds % 60;
+    }
+    if (minutes >= 60) {
+      hours++;
+      minutes = minutes % 60;
+    }
+    console.log('hours: ', hours, 'minutes: ', minutes, 'seconds: ', seconds);
+    console.log(seconds);
+  }, 1000)
 }
 
 function resetOpenCards() {
