@@ -108,6 +108,16 @@ h1 {
     cursor: pointer;
 }
 
+.timer {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.moves-container {
+    display: inline-block;
+    padding: 0 15px;
+}
+
 .modal {
     display: none;
     position: fixed;

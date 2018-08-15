@@ -5,6 +5,7 @@ const deckElement = document.querySelector('.deck');
 const modal = document.getElementById('congratsModal');
 const closeBtn = document.getElementsByClassName('closeBtn')[0];
 const movesElement = document.querySelector('.moves');
+const timeElement = document.querySelector('.time');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
@@ -126,8 +127,9 @@ function startTimer() {
       hours++;
       minutes = minutes % 60;
     }
+    timeElement.innerText = `${("0" + hours).slice(-2)}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`
+
     console.log('hours: ', hours, 'minutes: ', minutes, 'seconds: ', seconds);
-    console.log(seconds);
   }, 1000)
 }
 
