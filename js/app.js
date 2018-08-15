@@ -4,15 +4,13 @@ const cards = ['fa-mobile', 'fa-laptop', 'fa-server', 'fa-bug',
 const deckElement = document.querySelector('.deck');
 const modal = document.getElementById('congratsModal');
 const closeBtn = document.getElementsByClassName('closeBtn')[0];
-console.log('closeBtn', closeBtn)
+const movesElement = document.querySelector('.moves');
 let openCards = [];
 let matchedCards = [];
+let moves = 0;
 let shuffledCards;
 
-// Double the array of cards and shuffle them
-
 function initGame() {
-
   shuffledCards = shuffle(cards.concat(cards));
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('click', outsideClick);
@@ -43,6 +41,8 @@ function flipCard(cardElement) {
         }
       }
       if (openCards.length === 2) {
+        moves++;
+        movesElement.textContent = moves;
         if (!isMatch(openCards)) {
           setTimeout(function() {
             openCards.forEach((cardEl) => {
