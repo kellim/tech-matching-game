@@ -6,10 +6,15 @@ const modal = document.getElementById('congratsModal');
 const closeBtn = document.getElementsByClassName('closeBtn')[0];
 const movesElement = document.querySelector('.moves');
 const timeElement = document.querySelector('.time');
+const modalTime = document.querySelector('.modal-time');
+const modalMoves = document.querySelector('.modal-moves');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
 let timerInterval;
+let seconds = 0;
+let minutes = 0;
+let hours = 0 ;
 let shuffledCards;
 let gameStarted = false;
 
@@ -33,39 +38,36 @@ function initGame() {
 }
 
 function flipCard(cardElement) {   
-    if (isValidCardClick(cardElement)) {
-      displayCard(cardElement);
-      // timer should start on first card click of a game.
-      if (!gameStarted) {
-          startTimer();
-          gameStarted = true;
-      }
-
-      if (isMatch(openCards)) { 
+  if (isValidCardClick(cardElement)) {
+    displayCard(cardElement);
+    // timer should start on first card click of a game.
+    if (!gameStarted) {
+        startTimer();
+        gameStarted = true;
+    }
+    if (openCards.length === 2) {
+      moves++;
+      movesElement.textContent = moves;
+      if (!isMatch(openCards)) {
+        setTimeout(function() {
+          openCards.forEach((cardEl) => {
+            cardEl.classList.remove('open', 'show');
+          });
+          resetOpenCards();
+          }, 1000);
+      } else {    // Match
         openCards.forEach((card) => {
           updateMatchedCard(card);
         });
-        // Temporarily updated to test end game so one match wins game
+          // Temporarily updated to test end game so one match wins game
         if (isOver(matchedCards.length, 2)) { // shuffledCards.length)) {
           clearInterval(timerInterval);
           displayModal();
         }
-      }
-      if (openCards.length === 2) {
-        moves++;
-        movesElement.textContent = moves;
-        if (!isMatch(openCards)) {
-          setTimeout(function() {
-            openCards.forEach((cardEl) => {
-              cardEl.classList.remove('open', 'show');
-            });
-            resetOpenCards();
-           }, 1000);
-        } else {
-          resetOpenCards();
-        }
+        resetOpenCards();
       }
     }
+  }
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976 (changed var to let)
@@ -117,9 +119,6 @@ function updateMatchedCard(cardElement) {
 }
 
 function startTimer() {
-  let seconds = 0,
-      minutes = 0,
-      hours = 0;
   timerInterval = setInterval(() => {
     seconds++;
     if (seconds >= 60) {
@@ -130,7 +129,7 @@ function startTimer() {
       hours++;
       minutes = minutes % 60;
     }
-    timeElement.innerText = `${("0" + hours).slice(-2)}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`
+    timeElement.innerText = `${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`
   }, 1000)
 }
 
@@ -139,6 +138,13 @@ function resetOpenCards() {
 }
 
 function displayModal() {
+  let finalTime = hours > 0 ? `${hours} hour${hours === 1 ? '' : 's'} ` : '';
+  finalTime += hours > 0 && minutes > 0 ? ', ' : '';
+  finalTime += minutes > 0 ? `${minutes} minute${minutes === 1 ? '' : 's'} ` : '';
+  finalTime += finalTime ? ' and ' : '';
+  finalTime += `${seconds} second${seconds === 1 ? '' : 's'}.`;
+  modalTime.textContent = finalTime;
+  modalMoves.textContent = moves;
   modal.style.display = 'block';
 }
 
