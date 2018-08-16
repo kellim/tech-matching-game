@@ -8,6 +8,7 @@ const movesElement = document.querySelector('.moves');
 const timeElement = document.querySelector('.time');
 const modalTime = document.querySelector('.modal-time');
 const modalMoves = document.querySelector('.modal-moves');
+const starElements = document.querySelectorAll('.star');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
@@ -17,6 +18,7 @@ let minutes = 0;
 let hours = 0 ;
 let shuffledCards;
 let gameStarted = false;
+let stars = 3;
 
 function initGame() {
   shuffledCards = shuffle(cards.concat(cards));
@@ -37,7 +39,7 @@ function initGame() {
   });
 }
 
-function flipCard(cardElement) {   
+function flipCard(cardElement) {
   if (isValidCardClick(cardElement)) {
     displayCard(cardElement);
     // timer should start on first card click of a game.
@@ -48,6 +50,7 @@ function flipCard(cardElement) {
     if (openCards.length === 2) {
       moves++;
       movesElement.textContent = moves;
+      updateStars();
       if (!isMatch(openCards)) {
         setTimeout(function() {
           openCards.forEach((cardEl) => {
@@ -111,6 +114,17 @@ function isOver(matchedCardsLen, cardsLen) {
   return (matchedCardsLen === cardsLen);
 }
 
+function updateStars() {
+  if (moves <= 15) {
+    stars = 3
+  } else if (moves <= 20) {
+    stars = 2
+    starElements[2].classList.replace('fa-star', 'fa-star-o');
+  } else {
+    stars = 1
+    starElements[1].classList.replace('fa-star', 'fa-star-o');
+  }
+}
 
 function updateMatchedCard(cardElement) {
   cardElement.classList.add('match');
