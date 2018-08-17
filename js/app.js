@@ -167,11 +167,17 @@ function displayModal() {
 
 function addStarsToModal() {
   let starElement,
-      iconElement;
+      iconElement,
+      faIcon;
   for (let i = 0; i < 3; i++) {
     starElement = document.createElement('li');
     iconElement = document.createElement('li');
-    iconElement.classList.add('fa', 'fa-star');
+    if ((stars === 2 && i === 2) || (stars === 1 && i >= 1)) {
+      faIcon = 'fa-star-o'
+     } else {
+      faIcon = 'fa-star'
+    }
+    iconElement.classList.add('fa', faIcon);
     starElement.append(iconElement);
     modalStars.appendChild(starElement);
   }
