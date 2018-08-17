@@ -6,9 +6,10 @@ const modal = document.getElementById('congratsModal');
 const closeBtn = document.getElementsByClassName('closeBtn')[0];
 const movesElement = document.querySelector('.moves');
 const timeElement = document.querySelector('.time');
-const modalTime = document.querySelector('.modal-time');
-const modalMoves = document.querySelector('.modal-moves');
 const starElements = document.querySelectorAll('.star');
+const modalMoves = document.querySelector('.modal-moves');
+const modalStars = document.querySelector('.modal-stars');
+const modalTime = document.querySelector('.modal-time');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
@@ -90,6 +91,7 @@ function shuffle(array) {
 
 // Ensure only 2 cards can be clicked per turn and the same card cannot be clicked twice
 function isValidCardClick(cardElement) {
+  if (event.target)
   if ((openCards.length) >= 2 || openCards.includes(cardElement)) {
     return false;
   }
@@ -152,6 +154,7 @@ function resetOpenCards() {
 }
 
 function displayModal() {
+  addStarsToModal();
   let finalTime = hours > 0 ? `${hours} hour${hours === 1 ? '' : 's'} ` : '';
   finalTime += hours > 0 && minutes > 0 ? ', ' : '';
   finalTime += minutes > 0 ? `${minutes} minute${minutes === 1 ? '' : 's'} ` : '';
@@ -160,6 +163,18 @@ function displayModal() {
   modalTime.textContent = finalTime;
   modalMoves.textContent = moves;
   modal.style.display = 'block';
+}
+
+function addStarsToModal() {
+  let starElement,
+      iconElement;
+  for (let i = 0; i < 3; i++) {
+    starElement = document.createElement('li');
+    iconElement = document.createElement('li');
+    iconElement.classList.add('fa', 'fa-star');
+    starElement.append(iconElement);
+    modalStars.appendChild(starElement);
+  }
 }
 
 function closeModal() {

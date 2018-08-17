@@ -78,7 +78,7 @@ h1 {
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 2.75em;
+    font-size: 2.75rem;
 }
 
 /* Fixes bug where sometimes clicking on the same card twice
@@ -163,6 +163,27 @@ h1 {
 .modal-body {
     width: 100%;
     padding: 10px 20px;
+    text-align: center;
+}
+
+.modal-trophy {
+    padding: 0;
+    margin: 0;
+    color:  #daa520;
+    font-size: 4rem;
+}
+
+.modal-stars {
+    padding: 0;
+    margin: 0;
+    color: #ffd700;
+    font-size: 1.625rem;
+}
+
+.modal-stars li {
+    display: inline-block;
+    list-style: none;
+    padding: 2px;
 }
 
 .closeBtn {
@@ -175,12 +196,6 @@ h1 {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
-
-.trophy {
-    text-align: center;
-    color: #ffd700;
-    font-size: 5em;
 }
 
 @keyframes modalopen {
