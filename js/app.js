@@ -10,6 +10,7 @@ const starElements = document.querySelectorAll('.star');
 const modalMoves = document.querySelector('.modal-moves');
 const modalStars = document.querySelector('.modal-stars');
 const modalTime = document.querySelector('.modal-time');
+const restartBtn = document.querySelector('.restart');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
@@ -25,6 +26,7 @@ function initGame() {
   shuffledCards = shuffle(cards.concat(cards));
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('click', outsideClick);
+  restartBtn.addEventListener('click', restartGame);
 
   // Dynamically add shuffled cards with icons from Font Awesome to the deck element
   shuffledCards.forEach(card => {
@@ -50,7 +52,7 @@ function flipCard(cardElement) {
     }
     if (openCards.length === 2) {
       moves++;
-      movesElement.textContent = moves;
+      updateDisplayedMoves();
       updateStars();
       if (!isMatch(openCards)) {
         setTimeout(function() {
@@ -128,6 +130,19 @@ function updateStars() {
   }
 }
 
+function resetStars() {
+  stars = 3;
+  starElements.forEach(star => {
+    if (star.classList.contains('fa-star-o')) {
+      star.classList.replace('fa-star-o', 'fa-star');
+    }
+  })
+}
+
+function updateDisplayedMoves() {
+  movesElement.textContent = moves;
+}
+
 function updateMatchedCard(cardElement) {
   cardElement.classList.add('match');
   matchedCards.push(cardElement);
@@ -145,8 +160,12 @@ function startTimer() {
       hours++;
       minutes = minutes % 60;
     }
-    timeElement.innerText = `${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`
+    updateDisplayedTime();
   }, 1000)
+}
+
+function updateDisplayedTime() {
+  timeElement.innerText = `${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`
 }
 
 function resetOpenCards() {
@@ -191,6 +210,25 @@ function outsideClick(e) {
   if (e.target == modal) {
     modal.style.display = 'none';
   }
+}
+
+function restartGame() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.parentElement.removeChild(card);
+  });
+  clearInterval(timerInterval);
+  moves = 0;
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+  matchedCards = [];
+  openCards = [];
+  gameStarted = false;
+  updateDisplayedMoves();
+  updateDisplayedTime();
+  resetStars();
+  initGame();
 }
 
 initGame();
