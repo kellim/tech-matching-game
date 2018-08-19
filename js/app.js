@@ -93,7 +93,6 @@ function shuffle(array) {
 
 // Ensure only 2 cards can be clicked per turn and the same card cannot be clicked twice
 function isValidCardClick(cardElement) {
-  if (event.target)
   if ((openCards.length) >= 2 || openCards.includes(cardElement)) {
     return false;
   }
@@ -190,6 +189,7 @@ function addStarsToModal() {
       faIcon;
   for (let i = 0; i < 3; i++) {
     starElement = document.createElement('li');
+    starElement.classList.add('modal-star');
     iconElement = document.createElement('li');
     if ((stars === 2 && i === 2) || (stars === 1 && i >= 1)) {
       faIcon = 'fa-star-o'
@@ -212,6 +212,18 @@ function outsideClick(e) {
   }
 }
 
+function resetModal() {
+  const modalStarList = document.querySelectorAll('.modal-star')
+  modalTime.textContent = '';
+  modalMoves.textContent = '';
+  console.log('modalStarList', modalStarList);
+  if (modalStarList && modalStarList.length > 0) {
+    modalStarList.forEach(star => {
+      star.parentElement.removeChild(star);
+    });
+  }
+}
+
 function restartGame() {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
@@ -228,6 +240,7 @@ function restartGame() {
   updateDisplayedMoves();
   updateDisplayedTime();
   resetStars();
+  resetModal();
   initGame();
 }
 
