@@ -147,6 +147,7 @@ h1 {
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgb(0,0,0,0.17);
     animation-name: modalopen;
     animation-duration: 1s;
+    text-align: center;
 }
 
 .modal-header {
@@ -155,15 +156,13 @@ h1 {
     color: #fff;
 }
 
-.modal-header h2,
-.modal-footer h3 {
+.modal-title {
     margin: 0;
 }
 
 .modal-body {
     width: 100%;
     padding: 10px 20px;
-    text-align: center;
 }
 
 .modal-trophy {
@@ -190,6 +189,7 @@ h1 {
     color: #fff;
     float: right;
     font-size: 30px;
+    margin-left: -100%;
 }
 
 .closeBtn:hover, closeBtn:focus {

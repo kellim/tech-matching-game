@@ -2,7 +2,7 @@
 const cards = ['fa-mobile', 'fa-laptop', 'fa-server', 'fa-bug',
                'fa-download', 'fa-wifi', 'fa-print', 'fa-code'];
 const deckElement = document.querySelector('.deck');
-const modal = document.getElementById('congratsModal');
+const modal = document.querySelector('.modal');
 const closeBtn = document.getElementsByClassName('closeBtn')[0];
 const movesElement = document.querySelector('.moves');
 const timeElement = document.querySelector('.time');
