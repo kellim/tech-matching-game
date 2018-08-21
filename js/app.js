@@ -11,6 +11,7 @@ const modalMoves = document.querySelector('.modal-moves');
 const modalStars = document.querySelector('.modal-stars');
 const modalTime = document.querySelector('.modal-time');
 const restartBtn = document.querySelector('.restart');
+const modalRestartBtn = document.querySelector('.modal-restart-btn');
 let openCards = [];
 let matchedCards = [];
 let moves = 0;
@@ -27,6 +28,7 @@ function initGame() {
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('click', outsideClick);
   restartBtn.addEventListener('click', restartGame);
+  modalRestartBtn.addEventListener('click', restartGame);
 
   // Dynamically add shuffled cards with icons from Font Awesome to the deck element
   shuffledCards.forEach(card => {
@@ -225,6 +227,7 @@ function resetModal() {
 }
 
 function restartGame() {
+  closeModal();
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     card.parentElement.removeChild(card);

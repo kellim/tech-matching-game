@@ -144,6 +144,7 @@ h1 {
     background-color: #f4f4f4;
     margin: 20% auto;
     width: 70%;
+    font-size: 1.5rem;
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgb(0,0,0,0.17);
     animation-name: modalopen;
     animation-duration: 1s;
@@ -151,7 +152,7 @@ h1 {
 }
 
 .modal-header {
-    background: #02ccba;
+    background-color: #02ccba;
     padding: 15px;
     color: #fff;
 }
@@ -196,6 +197,14 @@ h1 {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-restart-btn {
+    background-color:  #02ccba;
+    color: #fff;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 @keyframes modalopen {
