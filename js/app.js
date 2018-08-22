@@ -68,7 +68,7 @@ function flipCard(cardElement) {
           updateMatchedCard(card);
         });
           // Temporarily updated to test end game so one match wins game
-        if (isOver(matchedCards.length, 2)) { // shuffledCards.length)) {
+        if (isOver(matchedCards.length, shuffledCards.length)) { 
           clearInterval(timerInterval);
           displayModal();
         }
