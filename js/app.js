@@ -34,7 +34,7 @@ function initGame() {
   shuffledCards.forEach(card => {
     const cardElement = document.createElement('li');
     const iconElement = document.createElement('i');
-    cardElement.classList.add('card');
+    cardElement.classList.add('card', 'animated', 'rollIn', 'delay-2s');
     iconElement.classList.add('fa', card);
     cardElement.appendChild(iconElement);
     deckElement.appendChild(cardElement);
