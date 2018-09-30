@@ -1,20 +1,24 @@
-# Memory Game Project
+# Tech Matching Game
 
-## Table of Contents
+This app is part of the Udacity Front-End Nanodegree and was added after I completed the Nanodegree and I went ahead and completed it. The game uses starter code from [this repository](https://github.com/udacity/fend-project-memory-game).
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## How to play
 
-## Instructions
+Flip over two cards to see if they match. If they do, they'll stay flipped over, and if not they'll be turned back over. Continue to take turns flipping over two cards until you've matched all the cards.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## Run Project Locally
 
-To get started, open `js/app.js` and start building out the app's functionality
+Clone or Fork this repository and open `index.html` in a web browser.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Technologies Used
+* JavaScript
+* [Google Fonts](https://fonts.google.com/)
+* [Font Awesome](https://fontawesome.com/)
 
-## Contributing
+## Contributions
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+As this is a Udacity project, no contributions will be accepted, but you can create your own similar game using the starter code in [this repository](https://github.com/udacity/fend-project-memory-game.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## License
+
+Since this includes Udacity starter code that does not have a license, I have not included an open source license like I normally would.
