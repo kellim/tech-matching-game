@@ -6,7 +6,7 @@ This app is part of the Udacity Front-End Nanodegree and was added after I compl
 
 Play the game online at [tech-matching-game.surge.sh](https://tech-matching-game.surge.sh)
 
-
+![Tech Matching Game Demo](https://github.com/kellim/tech-matching-game/blob/master/demo/demo1.gif)
 
 ## How to play
 
