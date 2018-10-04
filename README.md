@@ -23,7 +23,7 @@ Clone or Fork this repository and open `index.html` in a web browser.
 
 ## Contributions
 
-As this is a Udacity project, no contributions will be accepted, but you can create your own similar game using the starter code in [this repository](https://github.com/udacity/fend-project-memory-game).
+Contributions will not be accepted for this project, but you can create your own matching game using the starter code in [this repository](https://github.com/udacity/fend-project-memory-game).
 
 ## License
 
